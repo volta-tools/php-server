@@ -1,0 +1,48 @@
+; ---------------------------------------------------------------------------------------------------------------------
+;
+; This file is part of the Volta packages.
+;
+; (c) Rob Demmenie <rob@volta-framework.com>
+;
+; For the full copyright and license information, please view the LICENSE
+; file that was distributed with this source code.
+;
+; ---------------------------------------------------------------------------------------------------------------------
+
+;
+; Set settings system wide
+;
+php-server[verbose] = true
+php-server[host] = localhost
+php-server[port] = 8080
+php-server[root] = "src"
+php-server[file] = "index.html"
+; php-server[php-conf] =
+;
+; All entries in the env[] array will be set in the environment
+; and will exist during web servers process.
+;
+env[APP_ENV] = staging
+env[APP_DB_USERNAME] = "some_user_name"
+env[APP_DB_PASSWORD] = "^vhjkh5v#$@hjkgdws$%"
+
+
+; ---------------------------------------------------------------------------------------------------------------------
+; Overwrite settings per project bases
+;
+; Use these settings when the working directory of the php-server
+; matches the value of the section.
+;
+[/path/to/project]
+php-server[verbose] = false
+php-server[host] = 127.0.0.1
+php-server[port] = 8181
+php-server[root] =
+php-server[file] = index.php
+; php-server[php-conf] =
+
+env[APP_ENV] = development
+env[APP_DB_USERNAME] = root
+env[APP_DB_PASSWORD] =
+
+
