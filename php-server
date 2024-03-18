@@ -205,8 +205,8 @@ if($verbose) {
 if(isset($options['h'])) $host  = $options['h'];
 elseif (isset($options['host'])) $host  = $options['host'];
 else $host = $phpServer['host'];
-if ($host !== 'localhost' && !filter_var($host, FILTER_VALIDATE_IP)) {
-    fwrite(STDOUT, "\n\t{$RED}ERROR: \"$host\" is not a valid IP address!\n\n");
+if ($host !== 'localhost' && !filter_var(gethostbyname($host), FILTER_VALIDATE_IP)) {
+    fwrite(STDOUT, "\n\t{$RED}ERROR: \"$host\" is not a valid hostname or address!\n\n");
     exit(1);
 }
 if($verbose) fwrite(STDOUT, "{$LIGHT_GRAY}{$ITALIC} - Host: {$BOLD}{$GRAY}$host{$CLEAR}\n");
