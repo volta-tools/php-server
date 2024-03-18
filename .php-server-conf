@@ -15,17 +15,16 @@
 php-server[verbose] = true
 php-server[host] = localhost
 php-server[port] = 8080
-php-server[root] = "src"
-php-server[file] = "index.html"
+php-server[root] = "public"
+php-server[file] = "index.php"
 ; php-server[php-conf] =
-;
+
 ; All entries in the env[] array will be set in the environment
-; and will exist during web servers process.
+; and will exist during web the servers process.
 ;
 env[APP_ENV] = staging
-env[APP_DB_USERNAME] = "some_user_name"
-env[APP_DB_PASSWORD] = "^vhjkh5v#$@hjkgdws$%"
-
+env[APP_DB_USERNAME] = "user_name"
+env[APP_DB_PASSWORD] = "password"
 
 ; ---------------------------------------------------------------------------------------------------------------------
 ; Overwrite settings per project bases
