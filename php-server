@@ -1,6 +1,7 @@
 #!/usr/bin/env php
 <?php
-/*#!/usr/bin/php
+// #!/usr/bin/php
+/*
  * This file is part of the Volta packages.
  *
  * (c) ROb Demmenie <rob@volta-framework.com>
@@ -11,64 +12,39 @@
 declare(strict_types=1);
 declare(ticks=1);
 
-/*
- * Catch [Ctl] + c and give some feedback
- */
+const VERSION = '1.0.1';
+
+#region - Catch [Ctl] + c and give some feedback
+
+
 define('START', microtime(true));
-
 pcntl_signal(SIGINT, 'signalHandler');
-
 function signalHandler(int $signal, mixed $sigInfo):void{
     fwrite(STDOUT, "\n\n \e[32m- PHP build in web server stopped, \n");
-    fwrite(STDOUT, " \e[32m  has been active for \e[37m" . number_format(microtime(true) - START, 8). "\e[32m seconds.\n");
+    fwrite(STDOUT, " \e[32m  has been active for \e[37m" . number_format(microtime(true) - START, 4). "\e[32m seconds.\n");
     fwrite(STDOUT, "\e[0m\n\n" );
     exit(0);
 }
 
-#region - Command line markup codes
+
+#endregion -----------------------------------------------------------------------------------------------------------
+#region - Initialize command line markup codes
 
 
 $CLEAR = "\e[0m";
 $BOLD = "\e[1m";
 $ITALIC = "\e[3m";
 $UNDERLINE = "\e[4m";
-$REVERSED = "\e[7m";
-$STRIKETHROUGH = "\e[9m";
-$BLACK = "\e[30m";
 $RED = "\e[31m";
 $GREEN = "\e[32m";
 $YELLOW = "\e[33m";
 $BLUE = "\e[34m";
-$MAGENTA = "\e[35m";
 $CYAN = "\e[36m";
 $GRAY = "\e[37m";
 $FOREGROUND = "\e[39m"; // system foreground color
-$BLACK_BG = "\e[40m";
-$RED_BG = "\e[41m";
-$GREEN_BG = "\e[42m";
-$YELLOW_BG = "\e[43m";
-$BLUE_BG = "\e[44m";
-$MAGENTA_BG = "\e[45m";
-$CYAN_BG = "\e[46m";
-$LIGHT_GREEN = "\e[92m";
-$GRAY_BG = "\e[47m";
-$BACKGROUND = "\e[49m"; // system background color
 $LIGHT_GRAY = "\e[90m";
-$LIGHT_RED = "\e[91m";
-$LIGHT_YELLOW = "\e[93m";
-$LIGHT_BLUE = "\e[94m";
-$LIGHT_MAGENTA = "\e[95m";
-$LIGHT_CYAN = "\e[96m";
-$WHITE = "\e[97m";
-
-$LINE_HOR = 0x2500;  // ─
-$LINE_VERT = 0x2502; // │
-$CORNER_UPPER_LEFT = 0x250c; // ┌
-$CORNER_UPPER_RIGHT = 0x2510;
+$LINE_HOR = 0x2500;
 $CORNER_BOTTOM_LEFT = 0x2514;
-$CORNER_BOTTOM_RIGHT = 0x2518;
-
-const VERSION = '1.0.1';
 
 
 #endregion -----------------------------------------------------------------------------------------------------------
@@ -104,6 +80,7 @@ $workingDir = rtrim((string)$cwd, DIRECTORY_SEPARATOR);
 
 #endregion -----------------------------------------------------------------------------------------------------------
 #region - Options definitions and initialization
+
 
 /*
  * Settings
@@ -299,6 +276,7 @@ if (!empty($ini)){
     if($verbose) fwrite(STDOUT, "{$LIGHT_GRAY}{$ITALIC} - PHP initialization: {$BOLD}{$GRAY}".get_cfg_var('cfg_file_path')."{$CLEAR}\n");
 }
 
+
 #endregion -----------------------------------------------------------------------------------------------------------
 #region - Execute
 
@@ -331,7 +309,7 @@ if ($verbose) {
 }
 
 fwrite(STDOUT,"{$ITALIC}{$GRAY} Type {$BOLD}{$BLUE}[Ctrl] + C{$CLEAR}{$ITALIC}{$GRAY} to stop the Development Server{$CLEAR}\n");
-fwrite(STDOUT, "{$CLEAR}{$FOREGROUND}{$BACKGROUND}");
+fwrite(STDOUT, "{$CLEAR}{$FOREGROUND}");
 $result = shell_exec($command);
 
 fwrite(STDOUT, 'done!');

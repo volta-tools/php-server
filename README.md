@@ -3,9 +3,9 @@
 When working with PHP, I often utilize the built-in web server for development purposes. Sometimes, I need to run multiple instances to test backend and frontend separately. If you're familiar with this process, you'll recognize the common tasks involved:
 
 * Navigating to the project's document root, typically named public or src.
-* Executing the command php -S localhost.
+* Executing the command `php -S localhost`.
 * Selecting a port number, often reusing familiar numbers like 8080 or 9090.
-* Specifying the index.php file as the front controller.
+* Specifying the `index.php` file as the front controller.
 * Occasionally, I require different PHP ini files to be loaded via command line for specific test cases.
 * Forgetting to terminate previous instances and encountering errors when attempting to reuse ports, necessitating manual lookup and termination of Process IDs. 
 * Setting specific environment variables tailored to project modes before server startup.
@@ -31,13 +31,21 @@ php-server --help
 
 ## Configuration
 
-The configuration options are loaded using the following cascading steps:
+The configuration options are loaded through the following cascading steps:
 
 ### 1. Script defaults
-The script has default values for all the options
+The script comes with default values pre-set for all options:
+```ini
+php-server[verbose] = false
+php-server[host] =  'localhost'
+php-server[port] =  8080
+php-server[root] =  ''
+php-server[file] =  ''
+php-server[php-conf] =  ''
+```
 
 ### 2. Current user
-The script will look for a configuration file `.php-server-conf` in the home folder of the current user. The file is expected in the *.ini format (https://en.wikipedia.org/wiki/INI_file). See below for an example with comments.
+The script will search for a configuration file named `.php-server-conf` within the home directory of the current user. This file should follow the *.ini format (https://en.wikipedia.org/wiki/INI_file). Below is an example of the expected format with accompanying comments.
  
 
 ## Configuration File Example
@@ -52,32 +60,33 @@ php-server[host] = localhost
 php-server[port] = 8080
 php-server[root] = "public"
 php-server[file] = "index.php"
-; php-server[php-conf] =
- 
-; All entries in the env[] array will be set in the environment
-; and will exist during web the servers process.
+php-server[php-conf] =
+
+; 
+; All entries within the env[] array will be added in the environment and will 
+; persist throughout the web server's process.
 ;
 env[APP_ENV] = staging
-env[APP_DB_USERNAME] = "user_name"
-env[APP_DB_PASSWORD] = "password"
+env[APP_DB_USERNAME] = root
+env[APP_DB_PASSWORD] =
 
 
 ;  
 ; Overwrite settings per project bases
 ;
-; Use these settings when the working directory of the php-server
-; matches the value of the section.
+; Apply these settings when the working directory of the php-server matches the 
+; value specified in the section.
 ;
 [/path/to/project]
 php-server[verbose] = false
 php-server[host] = 127.0.0.1
 php-server[port] = 8181
-php-server[root] =
+php-server[root] = www
 php-server[file] = index.php
-; php-server[php-conf] =
+php-server[php-conf] = "/path/to/php/php.ini"
 
 env[APP_ENV] = development
-env[APP_DB_USERNAME] = root
-env[APP_DB_PASSWORD] =
+env[APP_DB_USERNAME] = "user_name"
+env[APP_DB_PASSWORD] = "password"
  
 ```
