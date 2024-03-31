@@ -31,10 +31,18 @@ php-server --help
 
 ## Configuration
 
-The configuration options are loaded through the following cascading steps:
+The configuration options are loaded through the following steps:
 
-### 1. Script defaults
-The script comes with default values pre-set for all options:
+### 1. Current working directory
+
+If there is a file called `.php-server-conf` present in the current working directory. this one will be used
+
+### 2. Current user
+The script will search for a configuration file named `.php-server-conf` within the home directory of the current user. This file should follow the *.ini format (https://en.wikipedia.org/wiki/INI_file). Below is an example of the expected format with accompanying comments.
+
+### 3. Script defaults
+if none is found or not all the settings are set we use the scripts defaults
+
 ```ini
 php-server[verbose] = false
 php-server[host] =  'localhost'
@@ -44,8 +52,8 @@ php-server[file] =  ''
 php-server[php-conf] =  ''
 ```
 
-### 2. Current user
-The script will search for a configuration file named `.php-server-conf` within the home directory of the current user. This file should follow the *.ini format (https://en.wikipedia.org/wiki/INI_file). Below is an example of the expected format with accompanying comments.
+### 4. Command line arguments
+All the settings, default or loaded by the configuration file, can be overwritten through passing new values in the command line.
  
 
 ## Configuration File Example
