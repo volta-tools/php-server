@@ -107,7 +107,7 @@ $customConfig = false;
  * #3 if all the above fail use defaults
  * #4 Arguments on the command line will always overwrite the settings
  */
-$configFile =$workingDir. '.php-server-conf'; // test configuration
+$configFile = $workingDir. DIRECTORY_SEPARATOR . '.php-server-conf'; // test configuration
 if (!is_file($configFile)) {
     if (isset($_SERVER['HOME'])) {
         $configFile = $_SERVER['HOME'] . DIRECTORY_SEPARATOR . '.php-server-conf';
