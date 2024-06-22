@@ -230,7 +230,7 @@ if(isset($options['r'])) $root  = $options['r'];
 elseif (isset($options['root'])) $root  = $options['root'];
 else $root = $phpServer['root'];
 $rootReal = realpath($workingDir . DIRECTORY_SEPARATOR . $root);
-if (!is_dir($rootReal)) {
+if (false === $rootReal || !is_dir($rootReal)) {
     fwrite(STDOUT, "\n\t{$RED}ERROR: Root '$root' is not a valid directory!\n\n");
     exit(1);
 }
